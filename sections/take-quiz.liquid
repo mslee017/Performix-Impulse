@@ -1,0 +1,53 @@
+<div class="take-quiz">
+  <div class="small-banner">
+    {{ section.settings.banner-image | img_url: 'master' | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+  </div>
+  <div class="page-width">
+    <div class="text-center">
+      <div class="quiz-padding">
+      <h2 class="quiz-header">{{ section.settings.heading | escape }}</h2>
+      <div class="quiz-text">
+        {{ section.settings.text }}
+      </div>
+      
+      <div class="btn-center">
+  		<a href="{{ section.settings.url }}" class="btn-black">TAKE QUIZ</a>
+	  </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+{%schema%}
+  {
+    "name":"Take Quiz",
+    "settings":[
+	  {
+		"type":"text",
+		"label":"Your header",
+		"id":"heading"
+	  },
+	  {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      },
+	  {
+        "type": "image_picker",
+        "id": "banner-image",
+        "label": "Banner Image"
+      },
+	  {
+		"type":"text",
+		"label":"Url",
+		"id":"url"
+	  }
+	],
+	"presets":[
+		{
+		  "name":"Take Quiz",
+		  "category":"Take Quiz"
+		}
+	]
+  }
+{%endschema%}

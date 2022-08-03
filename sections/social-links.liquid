@@ -1,0 +1,77 @@
+<div class="page-width social-section">
+  {% if section.settings.heading != blank %}
+    <div class="social-header text-center">
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size > 0 %}
+    <div class="logo-bar{% if section.settings.title_enable %} logo-bar--large{% endif %}">
+      {% for block in section.blocks %}
+        <div class="logo-bar-space{% if section.settings.title_enable %} logo-bar__item--large{% endif %}" {{ block.shopify_attributes }}>
+          {% if block.settings.link != blank %}
+            <a href="{{ block.settings.link }}" class="logo-bar__link">
+          {% endif %}
+          {% if block.settings.image != blank %}
+              <div class="social-icon">
+              	{{ block.settings.image | img_url: '160x160', scale: 1 | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+              	{{ block.settings.image_title }}
+              </div>
+          {% else %}
+            {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+          {% if block.settings.link != blank %}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+  {% endif %}
+</div>
+
+{% schema %}
+  {
+    "name": "Social Links",
+    "settings": [
+		{
+			"type":"text",
+			"label":"your header for section",
+			"id":"heading"
+		}
+	],
+	"blocks": [
+		{
+			"type":"image",
+			"name":"image block",
+			"settings":	[
+				{
+					"type":"image_picker",
+					"label":"your image",
+					"id":"image"
+				},
+				{
+            		"type":"richtext",
+					"label":"title",
+					"id":"image_title"
+          		},
+				{
+            		"type": "url",
+           	 		"id": "link",
+            		"label": "Link",
+            		"info": "Optional"
+          		}
+			]
+		}
+	],
+	"presets": [
+		{
+			"category":"image",
+			"name":"Social Links"
+		}
+	]
+  }
+{% endschema %}

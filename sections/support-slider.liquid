@@ -1,0 +1,246 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+
+<div class="slide-holder">
+
+<div class="page-width">
+  {% if section.settings.main-header != blank %}
+    <div class="main-header">
+      {{ section.settings.main-header }}
+    </div>
+  {% else %}
+  
+  {% endif %}
+  
+  <div class="level">
+    <div class="support-header">
+        {{ section.settings.support-header }}
+    </div>
+    <div class="support-text">
+      {{ section.settings.support-text }}
+      <div class="arrow"></div>
+    </div>
+  </div>
+</div>
+
+{% if section.blocks.size > 0 %}
+	<div class="new-product-collection">
+  		<div class="wrapper">
+          <div class="full_image {{ section.settings.arrow-height }}">
+  			<div class="featured_in_image full_image">
+    		  <div class="slick-featured-carousels">
+      			{% for block in section.blocks %}
+      			  <div class="featured_section">
+                    {% if block.settings.background-icon != blank %}
+                    <div class="background-image {{ block.settings.wide-icon }}" style="background-image: url('{{ block.settings.background-icon | img_url: 'master' }}');">
+                      <div class="product-header" style="color:{{ block.settings.body_text }}; font-size: {{ block.settings.font-size}}px;">
+                            {{ block.settings.producted-heading }}
+                          </div>
+                          
+                          <hr class="solid" style="border-bottom: 1px solid {{ block.settings.body_text }};">
+                      
+                      <div class="move-image {{ block.settings.wide-product }}">
+          				{% if block.settings.image != blank %}
+            			{{ block.settings.image | img_url: '500x500', scale: 2 | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+          				{% else %}
+            			
+          				{% endif %}
+        			  </div>
+                      
+                      <div class="slider-row">
+                        <div class="slide-text-holder">
+                          
+                          <div class="product-sub-header" style="color:{{ block.settings.body_text }};">
+                            {{ block.settings.product-sub-header }}
+                          </div>
+                          <div class="sst-product-description" style="color:{{ block.settings.body_text }};">
+                            {{ block.settings.description }}
+                          </div>
+                        </div>
+                        
+                      </div>
+      				</div>
+                    {% else %}
+                    <div class="product-header" style="color:{{ block.settings.body_text }}; font-size: {{ block.settings.font-size}}px;">
+                            {{ block.settings.producted-heading }}
+                          </div>
+                          
+                          <hr class="solid" style="border-bottom: 1px solid {{ block.settings.body_text }};">
+                      
+                      <div class="move-image {{ block.settings.wide-product }}">
+          				{% if block.settings.image != blank %}
+            			{{ block.settings.image | img_url: '500x500', scale: 2 | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+          				{% else %}
+            			
+          				{% endif %}
+        			  </div>
+                      
+                      <div class="slider-row">
+                        <div class="slide-text-holder">
+                          
+                          <div class="product-sub-header" style="color:{{ block.settings.body_text }};">
+                            {{ block.settings.product-sub-header }}
+                          </div>
+                          <div class="sst-product-description" style="color:{{ block.settings.body_text }};">
+                            {{ block.settings.description }}
+                          </div>
+                        </div>
+                        
+                      </div>
+                    
+                    {% endif %}
+              	  </div>
+     			{% endfor %}
+    		  </div>
+              <hr class="solid" style="border-bottom: 1px solid {{ block.settings.body_text }};">
+ 			</div>
+          </div>
+  		</div>
+	</div>
+{% endif %}
+</div>
+
+<!-- Test code start from here  -->
+<script>
+  $(document).ready(function() {
+    $('.tab-panels .tabs li').on('click', function() {
+      var $panel = $(this).closest('.tab-panels');
+      $panel.find('.tabs li.active').removeClass('active');
+      $(this).addClass('active');
+      var panelToShow = $(this).attr('rel');
+      $panel.find('.panel.active').slideUp(1, showNextPanel);
+      function showNextPanel() {
+        $(this).removeClass('active');
+        $('#'+panelToShow).slideDown(1, function() {
+          $(this).addClass('active');
+        });
+      }
+    }); 
+ 
+    $(".slider-homepage").slick({
+      dots: true,     
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      infinite: true,      
+      swipe: true,
+    }); 
+    $(".product-detail .bottomLine").click(function(){
+      var url= $(this).attr("data-url");
+      $(location).attr('href',url+'#scroll-to-rv');
+    });
+    if ($(window).width() > 767) {
+      $('.slick-featured-carousels').slick({
+        lazyLoad: 'ondemand',
+        arrows: true,
+        dots: true,
+        slidesToShow: 1,
+        infinite: true,
+        centerMode: true
+      });
+    }
+    else{
+      $('.slick-featured-carousels').slick({
+        lazyLoad: 'ondemand',
+        arrows: true,
+        dots: true,
+        slidesToShow: 1,
+        infinite: true,
+        centerMode: true
+      });
+    }
+  });
+  
+</script>
+<!-- Test code end from here  -->
+
+{% schema %}
+  {
+    "name": "Support Slider",
+    "settings": [
+	  {
+        "type": "richtext",
+        "id": "main-header",
+        "label": "Main-Header"
+      },
+	  {
+        "type": "richtext",
+        "id": "support-header",
+        "label": "Support-Header"
+      },
+	  {
+        "type": "richtext",
+        "id": "support-text",
+        "label": "Support-Text"
+      },
+	  {
+        "type":"text",
+        "label":"Extra Class",
+        "id":"arrow-height"
+      }
+	],
+	"blocks": [
+		{
+			"type":"image",
+			"name":"image block",
+			"settings":	[
+				{
+                  "type":"text",
+                  "label":"Product header",
+                  "id":"producted-heading"
+                },
+ 				{
+    				"type": "range",
+    				"id": "font-size",
+    				"min": 8,
+    				"max": 48,
+    				"step": 1,
+    				"unit": "px" ,
+    				"label": "Font size",
+    				"default": 40
+    			},
+				{
+                  "type": "richtext",
+                  "id": "product-sub-header",
+                  "label": "Sub-header"
+                },
+				{
+                  "type": "richtext",
+                  "id": "description",
+                  "label": "Description"
+                },
+				{
+				  "type": "color",
+				  "id": "body_text",
+				  "label": "Body text"
+				},
+				{
+					"type":"image_picker",
+					"label":"your image",
+					"id":"image"
+				},
+				{
+				    "type":"image_picker",
+					"label":"Background icon",
+					"id":"background-icon"
+                },
+				{
+                  "type":"text",
+                  "label":"Extra Class",
+                  "id":"wide-icon"
+                },
+				{
+                  "type":"text",
+                  "label":"For Wide Products",
+                  "id":"wide-product"
+                }
+			]
+		}
+	],
+	"presets": [
+		{
+			"category":"image",
+			"name":"Support Slider"
+		}
+	]
+  }
+{% endschema %}

@@ -1,0 +1,74 @@
+<div class="join-community">
+<div class="join-banner fitops" {% if section.settings.image %} style="background-image: url('{{ section.settings.image | img_url: 'master' }}'); background-position: center;"{% endif %}>
+    
+  <div class="hero__inner grid__item">
+    <div class="page-width text-center">
+      {% if section.settings.title != blank %}
+        <h2 class="join-header">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %} 
+        
+      {% if section.settings.text != blank %}
+        <div class="join-text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+      
+      {% if section.settings.image-product != blank %}
+        <div class="banner-first-text">
+          {{ section.settings.image-product | img_url: '160x160', scale: 2 | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+        </div>
+      {% endif %}
+      
+      <div class="btn-center">
+  		<a href="{{ section.settings.url }}" class="btn-yellow">JOIN NOW</a>
+	  </div>
+        
+    </div>
+  </div>
+</div>
+</div>
+    
+
+
+{% schema %}
+  {
+    "name": "Join Community",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text"
+      },
+	  {
+		"type":"text",
+		"label":"Url",
+		"id":"url"
+	  },
+	  {
+        "type": "image_picker",
+        "id": "image-product",
+        "label": "Image"
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "Join Community",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

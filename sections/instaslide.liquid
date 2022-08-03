@@ -1,0 +1,85 @@
+<div class="insta-slide">
+{% if section.settings.image != blank %}
+	<div class="insta-icon">
+      {{ section.settings.image | img_url: '160x160', scale: 2 | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+    </div>
+	<div class="insta-header text-center">
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+{% else %}
+	{{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+{% endif %}
+
+<style>
+  #insta-feed{width:{{section.settings.feed_width}}%;}
+  #insta-feed h2{font-size:{{section.settings.heading_size}}px;font-family: {{section.settings.heading_font.family }};}{{ section.settings.heading_font | font_face }}
+</style>
+
+{{section.settings.html_area}}{% unless section.settings.html_area contains "feed-" %}
+<div id="insta-feed"></div>
+{% endunless  %}
+
+<div class="btn-center">
+  <a href="{{ section.settings.url }}" class="btn-black">FOLLOW</a>
+</div>
+</div>
+
+{%schema%}
+  {
+    "name":"Instaslide App",
+    "settings":[
+	  {
+		"type":"image_picker",
+		"label":"your image",
+		"id":"image"
+	  },
+	  {
+		"type":"text",
+		"label":"Your instagram name",
+		"id":"heading"
+	  },
+	  {
+		"type":"text",
+		"label":"Url",
+		"id":"url"
+	  },
+	  {
+		"type":"font_picker",
+		"label":"Heading font.",
+		"id":"heading_font",
+		"default": "helvetica_n4"
+	  },
+	  {
+		"type":"range",
+		"id":"heading_size",
+		"min":10,
+		"max":30,
+		"step":1,
+		"unit":"px",
+		"label":"Heading Size",
+		"default":20
+	  },
+	  {
+		"type":"range",
+		"id":"feed_width",
+		"min":50,
+		"max":100,
+		"step":5,
+		"unit":"%",
+		"label":"Feed Width",
+		"default":100
+	  },
+	  {
+		"type":"textarea",
+		"id":"html_area",
+		"label":"Custom Code (optional)"
+	  }
+	],
+	"presets":[
+		{
+		  "name":"Instaslide App",
+		  "category":"Instagram Slide"
+		}
+	]
+  }
+{%endschema%}

@@ -1,0 +1,106 @@
+<div class="banner-holder">
+<div class="banner fitops" {% if section.settings.image %} style="background-image: linear-gradient(176deg, rgba(0, 0, 0, 0.0) 50%, rgba(0, 0, 0, 0.7) 70% 82%, white calc(82% + 2px)), url('{{ section.settings.image | img_url: 'master' }}'); background-position: center;"{% endif %}>
+  
+  <div class="hero__inner grid__item">
+    <div class="page-width text-center">
+      {% if section.settings.title != blank %}
+        <h2 class="banner-first-header">
+          {{ section.settings.title }}
+        </h2>
+      {% endif %}
+    
+      {% if section.settings.subhead != blank %}
+        <h2 class="banner-second-header">
+          {{ section.settings.subhead }}
+        </h2>
+      {% endif %}   
+      
+      <hr class="banner-line">
+        
+      {% if section.settings.text != blank %}
+        <div class="banner-first-text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+      
+      {% if section.settings.subtext != blank %}
+        <div class="banner-second-text">
+          {{ section.settings.subtext }}
+        </div>
+      {% endif %}
+      
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        <a target="_blank" href="{{ section.settings.button_link }}" 
+           class="btn hero__btn"
+           style="margin-top: 40px; margin-bottom: 40px;">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {% endif %}    
+    </div>
+  </div>
+  <div class="small-header-banner">
+    {{ section.settings.banner-image | img_url: 'master' | img_tag: section.settings.image.alt, 'logo-bar__image' }}
+  </div>
+</div>
+</div>
+    
+
+
+{% schema %}
+  {
+    "name": "Image with text overlay",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image (min width = 2000px)"
+      },
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading",
+        "default": "<p>Image with text overlay</p>"
+      },
+      {
+        "type": "textarea",
+        "id": "subhead",
+        "label": "Heading",
+        "default": "<p>Image with text overlay</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+      },
+	  {
+        "type": "richtext",
+        "id": "subtext",
+        "label": "SubText"
+      },
+	  {
+        "type": "image_picker",
+        "id": "banner-image",
+        "label": "Banner Image"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "Banner Img w/ Overlay",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

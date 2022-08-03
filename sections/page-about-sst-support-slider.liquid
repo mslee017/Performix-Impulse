@@ -1,0 +1,87 @@
+{% if section.settings.section_heading != blank %}
+    <div class="page-width section-heading-container">
+      <h2 class="section-heading">{{ section.settings.section_heading | escape }}</h2>
+      <h6 class="section-sub-heading">{{section.settings.section_sub_heading | escape }}</h6>
+    </div>
+  {% endif %}
+<div class="page-product-slider">
+  
+  {% for block in section.blocks %}
+  	<div class="page-product-slider-container">
+		<div class="page-product-content-container">
+            <h1 class="content-header">{{block.settings.heading}}</h1>
+            <h6 class="content-sub-header">{{block.settings.sub_heading}}</h6>
+          	<p class="content-paragraph">{{block.settings.product_description}}</p>
+        </div>
+        <div class="page-product-image-container">
+            <img src="{{block.settings.product_image | img_url: '300x'}}" alt="" />
+        </div>
+      </div>
+  {% endfor %}
+</div>
+
+
+{% schema %}
+    {
+        "name": "About SST Product Slider",
+        "settings": [
+			{
+				"type": "text",
+				"label": "Section Heading",
+				"id": "section_heading"
+			},
+			{
+				"type": "text",
+				"label": "Section Sub-Heading",
+				"id": "section_sub_heading"
+			}
+			
+		],
+        "blocks": [
+            {
+                "type": "Product",
+                "name": "Product",
+                "settings": [
+                    {
+                        "id": "heading",
+                        "label": "Product Heading",
+                        "type": "text"
+                    },
+                    {
+                        "id": "sub_heading",
+                        "label": "Sub-Heading",
+                        "type": "text"
+                    },
+                    {
+						"id": "product_description",
+						"label": "Product Description",
+						"type": "richtext"
+					},
+                    {
+                        "id": "product_image",
+                        "label": "Product Image",
+                        "type": "image_picker"
+                    }	
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "About SST Product Slider"
+            }
+        ]
+    }
+{% endschema %}
+
+{% stylesheet %}
+
+
+.page-product-slider p {
+	font-size: 13px !important;
+}
+
+
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,95 @@
+<div class="page-product-slider">
+  {% for block in section.blocks %}
+    <div class="page-product-slider-container">
+		<div class="page-product-content-container">
+          <a href="{{block.settings.product_selector.url}}">
+            <h1 class="content-header">{{block.settings.heading}}</h1>
+          </a>
+            <h6 class="content-sub-header">{{block.settings.sub_heading}}</h6>
+            <p class="content-paragraph">{{block.settings.paragraph_one}}</p>
+            <p class="content-paragraph">{{block.settings.paragraph_two}}</p>
+            <p class="content-paragraph">{{block.settings.paragraph_three}}</p>
+
+            <div class="powered-by-container">
+                
+                <div class="powered-by-image">
+                  {% if block.settings.powered_by_image %}
+                  <h4 class="powered-by-heading">Powered By</h4>
+                    <img src="{{block.settings.powered_by_image | img_url: 'master'}}" />
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="page-product-image-container">
+            <img src="{{block.settings.product_image | img_url: '300x'}}" alt="" />
+        </div>
+      </div>
+  {% endfor %}
+</div>
+
+
+{% schema %}
+    {
+        "name": "Product Slider",
+        "settings": [],
+        "blocks": [
+            {
+                "type": "Product",
+                "name": "Product",
+                "settings": [
+                    {
+                        "id": "heading",
+                        "label": "Product Heading",
+                        "type": "text"
+                    },
+                    {
+                        "id": "sub_heading",
+                        "label": "Sub-Heading",
+                        "type": "text"
+                    },
+                    {
+                        "id": "paragraph_one",
+                        "label": "Brief Description One",
+                        "type": "text"
+                    },
+                    {
+                        "id": "paragraph_two",
+                        "label": "Brief Description Two",
+                        "type": "text"
+                    },
+                    {
+                        "id": "paragraph_three",
+                        "label": "Brief Description Three",
+                        "type": "text"
+                    },
+                    {
+                        "id": "product_image",
+                        "label": "Product Image",
+                        "type": "image_picker"
+                    },
+					{
+						"id": "powered_by_image",
+						"label": "Powered By Image",
+						"type": "image_picker"
+					},
+					{
+						"id": "product_selector",
+						"label": "Selected Product To Link",
+						"type": "product"
+					}
+					
+                ]
+            }
+        ],
+        "presets": [
+            {
+                "name": "Product Slider"
+            }
+        ]
+    }
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
